@@ -66,7 +66,7 @@ with col1:
         alpha = st.slider(
             "Alpha",
             min_value=0.0,
-            max_value=1.0,
+            max_value=0.3,
             value=0.05,
             step=0.01,
             help="Significance level (e.g., 0.05 for 95% confidence)"
