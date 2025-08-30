@@ -130,29 +130,32 @@ with col1:
 with col2:
     if response:
         with st.spinner("⚙️ Running Simulations..."):
-            figure, var, cvar = response
+            figure, statistics = response
 
         st.subheader("📊 Simulation Results")
         st.pyplot(figure)
 
         with st.expander("📈 Simulation Statistics", expanded=True):
-            stat_col1, stat_col2, stat_col3 = st.columns(3)
-            
-            with stat_col1:
-                st.metric(
-                    label="Portfolio Value",
-                    value=f"${portfolio_value:,.0f}"
-                )
-            with stat_col2:
-                st.metric(
-                    label="Value at Risk (Loss)",
-                    value=f"${portfolio_value-var:,.2f}"
-                )
-            with stat_col3:
-                st.metric(
-                    label="Conditional VaR (Loss)",
-                    value=f"${portfolio_value-cvar:,.2f}"
-                )
+            # First row: absolute portfolio values
+            abs_col1, abs_col2, abs_col3, abs_col4 = st.columns(4)
+            with abs_col1:
+                st.metric("Initial Portfolio Value", f"${portfolio_value:,.0f}")
+            with abs_col2:
+                st.metric("Expected Portfolio Value", f"${statistics['expected_value']:,.2f}")
+            with abs_col3:
+                st.metric(f"VaR Threshold ({(1-alpha) * 100:.0f}%)", f"${statistics['var']:,.2f}")
+            with abs_col4:
+                st.metric(f"CVaR Threshold ({(1-alpha) * 100:.0f}%)", f"${statistics['cvar']:,.2f}")
+
+            # Second row: losses and Sharpe ratio
+            loss_col1, loss_col2, loss_col3 = st.columns(3)
+            with loss_col1:
+                st.metric(f"VaR Loss ({(1-alpha) * 100:.0f}%)", f"${portfolio_value - statistics['var']:,.2f}")
+            with loss_col2:
+                st.metric(f"CVaR Loss ({(1-alpha) * 100:.0f}%)", f"${portfolio_value - statistics['cvar']:,.2f}")
+            with loss_col3:
+                st.metric("Sharpe Ratio\n(Annualized, 3M T-Bill)", f"{statistics['sharpe_ratio']:.2f}")
 
     else:
         st.info("ℹ️ Enter tickers and parameters on the left to run a simulation.")
+

@@ -1,30 +1,35 @@
-# Monte Carlo Portfolio Simulation
+# 📈 Monte Carlo Portfolio Simulation
 
-## Project Overview
+## 📝 Project Overview
 
-This project simulates the performance of a portfolio of stocks using **Monte Carlo methods**. The goal is to estimate potential portfolio returns, risk metrics such as **Value at Risk (VaR)** and **Conditional Value at Risk (CVaR)**, and visualize multiple possible future scenarios.
+Simulates the performance of a stock portfolio using **Monte Carlo methods** to estimate potential returns and risk metrics. Provides insights into portfolio risk and expected performance under uncertainty.
+
+---
+
+## ⚡ Features
+
+### 1️⃣ Dynamic Stock Selection  
+- Input any list of stock tickers to include in the portfolio.  
+
+### 2️⃣ Flexible Portfolio Weights & Portfolio Value  
+- Specify weights for each stock, with automatic normalization.  
+- Set total portfolio value to scale simulations.  
+
+### 3️⃣ Monte Carlo Simulation & Risk Metrics  
+- Generates multiple portfolio paths using historical returns and covariance.  
+- Calculates **Value at Risk (VaR)**, **Conditional VaR (CVaR)**, and **expected portfolio value**.  
+- Computes **Sharpe Ratio** using real-world 3-month T-Bill yields.  
+
+### 4️⃣ Interactive Dashboard  
+- Visualizes simulated portfolio trajectories 📊.  
+- Displays VaR, CVaR, expected value, and Sharpe ratio metrics for easy interpretation.
 
 ---
 
-## Features
+## 💻 Technical Stack
 
-1. **Dynamic Stock Selection**  
-   - Users can input any list of stock tickers to include in the portfolio.
-
-2. **Portfolio Weights**  
-   - Specify weights for each stock.  
-   - Automatically normalizes weights to sum to 1.
-
-3. **Monte Carlo Simulation**  
-   - Uses historical stock returns to calculate mean returns and covariance matrix.  
-   - Simulates multiple future paths of portfolio performance by sampling from a multivariate normal distribution.
-
-4. **Risk Metrics**  
-   - **Value at Risk (VaR)**: The worst expected loss at a given confidence level (e.g., 5%).  
-   - **Conditional VaR (CVaR)**: The average of losses exceeding the VaR threshold.
-
-5. **Visualization**  
-   - Plots simulated portfolio paths.  
-   - Displays VaR and CVaR as reference lines.  
-
----
+- **Python** – Core language for computation  
+- **NumPy & Pandas** – Data manipulation and numerical computation  
+- **yFinance** – Historical stock data and 3-month T-Bill rates  
+- **Matplotlib** – Plotting portfolio trajectories and risk metrics  
+- **Streamlit** – Interactive dashboard for user inputs and visualizations  
