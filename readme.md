@@ -1,4 +1,4 @@
-# 📈 Monte Carlo Portfolio Simulation [link](https://monte-carlo-portfolio-simulation-gh3lp6kb8kvqpctuztdmsc.streamlit.app/)
+# 📈 [Monte Carlo Portfolio Simulation](https://monte-carlo-portfolio-simulation-gh3lp6kb8kvqpctuztdmsc.streamlit.app/)
 
 ## 📝 Project Overview
 
