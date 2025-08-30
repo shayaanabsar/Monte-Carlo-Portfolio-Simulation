@@ -51,8 +51,7 @@ def plot_graph(portfolio_simulations):
     ax.set_ylabel("Portfolio Value")
     ax.grid(True)
 
-    # Pass the figure to Streamlit
-    st.pyplot(fig)
+    return fig
 
 
 def perform_mc_simulation(tickers: [str], weights: np.ndarray, num_simulations: int, num_days: int):
@@ -66,5 +65,5 @@ def perform_mc_simulation(tickers: [str], weights: np.ndarray, num_simulations: 
     random_samples = np.random.multivariate_normal(mean_returns, covariance, size=(num_simulations, num_days))  # shape: (T, n_stocks)
     daily_portfolio_returns = daily_portfolio_returns = np.einsum('sdt,t->sd', random_samples, weights)
     portfolio_paths = np.cumprod(daily_portfolio_returns + 1, axis=1).T
-    plot_graph(portfolio_paths)
-
+    
+    return plot_graph(portfolio_paths)
