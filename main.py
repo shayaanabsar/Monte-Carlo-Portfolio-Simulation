@@ -62,16 +62,23 @@ def calculate_sharpe_ratio(final_returns, num_days):
     """
     final_returns = np.array(final_returns)
 
-    # Download 3-month T-bill yield as risk-free rate
+    # Download 3-month T-bill yield as annual risk-free rate
     rf_data = yf.download('^IRX', period='1y', progress=False)['Close'].dropna()
     rf_annual = float(rf_data.iloc[-1] / 100)
 
-    # Excess returns over risk-free
-    excess_returns = final_returns - rf_annual
+    # Convert annual risk-free rate to period risk-free return
+    rf_period = (1 + rf_annual)**(num_days / 252) - 1
 
-    # Sharpe ratio: mean / std, annualized for simulation horizon
+    # Excess returns over risk-free for the period
+    excess_returns = final_returns - rf_period
+
+    # Sharpe ratio: mean / std
     sharpe_ratio = excess_returns.mean() / excess_returns.std(ddof=1)
-    return sharpe_ratio * np.sqrt(252 / num_days)
+
+    # Annualize Sharpe
+    annualized_sharpe = sharpe_ratio * np.sqrt(252 / num_days)
+
+    return annualized_sharpe
 
 
 # -----------------------------
